@@ -1,0 +1,9 @@
+Use this:
+
+pandas
+numpy
+scikit-learn
+matplotlib
+tqdm
+python-dotenv
+openai

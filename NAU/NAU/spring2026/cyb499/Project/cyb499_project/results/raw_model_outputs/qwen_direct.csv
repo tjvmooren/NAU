@@ -1,0 +1,501 @@
+sample_id,ground_truth,prediction,confidence,evidence,key_fields,raw_response,model,prompt_name,status,error_message
+CYB499-001,Benign,Benign,High,"The event records a legitimate browser process (brave.exe) launched by explorer.exe, which is a common and expected user interaction. The process is from a known, trusted application (Brave Browser) and the execution context is consistent with normal user activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a legitimate browser process (brave.exe) launched by explorer.exe, which is a common and expected user interaction. The process is from a known, trusted application (Brave Browser) and the execution context is consistent with normal user activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-002,Benign,Benign,High,"The event shows a standard PowerShell command execution of 'whoami', which is a common and legitimate administrative command used to verify current user identity. No suspicious activity, unauthorized access, or malicious script content is present in the command line or script block text.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a standard PowerShell command execution of 'whoami', which is a common and legitimate administrative command used to verify current user identity. No suspicious activity, unauthorized access, or malicious script content is present in the command line or script block text.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-003,Malicious,Benign,High,"The event involves bitsadmin.exe being used to set a notification command line to launch notepad.exe, which is a common administrative function. The parent process is cmd.exe, a legitimate system process. No signs of malicious behavior such as unauthorized file execution, privilege escalation, or suspicious command patterns are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves bitsadmin.exe being used to set a notification command line to launch notepad.exe, which is a common administrative function. The parent process is cmd.exe, a legitimate system process. No signs of malicious behavior such as unauthorized file execution, privilege escalation, or suspicious command patterns are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-004,Benign,Benign,High,"Event ID 5058 indicates a successful logon by the LOCAL SERVICE account, which is a legitimate system account used by Windows services. This activity is normal and expected, and not indicative of malicious behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 5058 indicates a successful logon by the LOCAL SERVICE account, which is a legitimate system account used by Windows services. This activity is normal and expected, and not indicative of malicious behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-005,Malicious,Malicious,High,"The event shows a command-line execution of cmd.exe to uninstall a product named 'Tightvnc' via wmic, which is a common indicator of reconnaissance or removal of remote access tools. This action, especially when initiated by a non-standard user (admin_test) and executed from a system process, suggests a potential malicious intent to remove legitimate or previously installed remote access tools, possibly as part of an attack or post-exploitation phase.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a command-line execution of cmd.exe to uninstall a product named 'Tightvnc' via wmic, which is a common indicator of reconnaissance or removal of remote access tools. This action, especially when initiated by a non-standard user (admin_test) and executed from a system process, suggests a potential malicious intent to remove legitimate or previously installed remote access tools, possibly as part of an attack or post-exploitation phase.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-006,Malicious,Benign,High,"The event records a process creation by WMIC.exe, which is a legitimate Windows management tool commonly used for system monitoring and configuration. The process is located in the system32 directory and executed by a standard system account, indicating normal administrative activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a process creation by WMIC.exe, which is a legitimate Windows management tool commonly used for system monitoring and configuration. The process is located in the system32 directory and executed by a standard system account, indicating normal administrative activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-007,Benign,Benign,High,"Event ID 5059 indicates a successful logon by the LOCAL SERVICE account, which is a legitimate system account used by Windows services. This activity is normal and expected, and not indicative of malicious behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 5059 indicates a successful logon by the LOCAL SERVICE account, which is a legitimate system account used by Windows services. This activity is normal and expected, and not indicative of malicious behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-008,Benign,Benign,High,"The event is a PowerShell event ID 400 (script block logging) with a command line that references a local file path '~/Desktop/test.ps1'. The script block text contains metadata about the PowerShell host and engine, but no actual script content is executed or malicious commands are present. The path '~/Desktop' is a common user-level directory and does not indicate malicious activity. The event lacks signs of command execution, privilege escalation, or known malicious behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event is a PowerShell event ID 400 (script block logging) with a command line that references a local file path '~/Desktop/test.ps1'. The script block text contains metadata about the PowerShell host and engine, but no actual script content is executed or malicious commands are present. The path '~/Desktop' is a common user-level directory and does not indicate malicious activity. The event lacks signs of command execution, privilege escalation, or known malicious behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-009,Benign,Benign,High,"Event ID 4624 indicates a successful logon. The user 'WORKGROUP\SERVER002$' is a built-in local system account commonly used by Windows services. The image 'C:\Windows\System32\services.exe' is a legitimate system process, and the command line matches the expected behavior of the services.exe process. This is a normal system operation and not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4624 indicates a successful logon. The user 'WORKGROUP\\SERVER002$' is a built-in local system account commonly used by Windows services. The image 'C:\\Windows\\System32\\services.exe' is a legitimate system process, and the command line matches the expected behavior of the services.exe process. This is a normal system operation and not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-010,Benign,Benign,High,"Event ID 4648 indicates a successful logon, and the user 'WORKGROUP\SERVER002$' is a built-in system account typically used for local system services. The image path points to winlogon.exe, which is a legitimate system process responsible for user authentication and login. This is a normal system behavior and not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4648 indicates a successful logon, and the user 'WORKGROUP\\SERVER002$' is a built-in system account typically used for local system services. The image path points to winlogon.exe, which is a legitimate system process responsible for user authentication and login. This is a normal system behavior and not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-011,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, attempting to validate credentials with NTLM authentication. This is a clear indication of a credential brute-forcing attempt, which is a common malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, attempting to validate credentials with NTLM authentication. This is a clear indication of a credential brute-forcing attempt, which is a common malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-012,Benign,Benign,High,"The command line executes 'ipconfig', a standard Windows command used for network configuration inspection, and is commonly run by users or scripts for network diagnostics. No suspicious activity or unauthorized behavior is present in the script block text or command line.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command line executes 'ipconfig', a standard Windows command used for network configuration inspection, and is commonly run by users or scripts for network diagnostics. No suspicious activity or unauthorized behavior is present in the script block text or command line.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-013,Benign,Benign,High,"The script block performs a legitimate system check by evaluating available disk space on the system drive and comparing it to a threshold. It does not execute any malicious commands, modify system settings, or perform unauthorized actions. The command is run under Restricted Execution Policy, which limits potential harm, and the script only outputs diagnostic information about disk space.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block performs a legitimate system check by evaluating available disk space on the system drive and comparing it to a threshold. It does not execute any malicious commands, modify system settings, or perform unauthorized actions. The command is run under Restricted Execution Policy, which limits potential harm, and the script only outputs diagnostic information about disk space.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-014,Malicious,Benign,High,"The event involves bitsadmin.exe executing a /complete command, which is a normal system operation used to complete a download or transfer initiated by bitsadmin. The process is running from a legitimate system path and is commonly used for background file transfers. No signs of malicious activity are present in the command or execution context.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves bitsadmin.exe executing a /complete command, which is a normal system operation used to complete a download or transfer initiated by bitsadmin. The process is running from a legitimate system path and is commonly used for background file transfers. No signs of malicious activity are present in the command or execution context.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-015,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, specifically targeting the current user's account with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, specifically targeting the current user's account with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-016,Malicious,Malicious,High,"The event shows the execution of bitsadmin.exe to download a file from a GitHub URL and save it to a temporary location, followed by a command to execute a PowerShell script via notepad.exe. This behavior is indicative of a download and execution of malicious payload, especially with the use of a remote URL and execution of a script in a temporary directory.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows the execution of bitsadmin.exe to download a file from a GitHub URL and save it to a temporary location, followed by a command to execute a PowerShell script via notepad.exe. This behavior is indicative of a download and execution of malicious payload, especially with the use of a remote URL and execution of a script in a temporary directory.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-017,Malicious,Benign,High,"The event involves a legitimate console host (conhost.exe) launched by PowerShell, which is a common and normal process for user interaction. The command line and image paths are standard for Windows console operations, and the parent process (powershell.exe) is a known legitimate process. No signs of malicious activity are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves a legitimate console host (conhost.exe) launched by PowerShell, which is a common and normal process for user interaction. The command line and image paths are standard for Windows console operations, and the parent process (powershell.exe) is a known legitimate process. No signs of malicious activity are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-018,Benign,Benign,High,"The event involves the execution of AM_Base.exe from the SoftwareDistribution folder, which is a common location for Windows Update components. The parent process is wuauclt.exe, the Windows Update client, indicating this is part of a legitimate system update process. No signs of malicious behavior are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves the execution of AM_Base.exe from the SoftwareDistribution folder, which is a common location for Windows Update components. The parent process is wuauclt.exe, the Windows Update client, indicating this is part of a legitimate system update process. No signs of malicious behavior are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-019,Benign,Benign,High,"The event records a software update installation process initiated by wuauclt.exe, which is a legitimate Windows Update client. The executable path and command line indicate a known patch installation (AM_Delta_Patch_1.427.562.0.exe) in the SoftwareDistribution directory, consistent with normal Windows Update behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a software update installation process initiated by wuauclt.exe, which is a legitimate Windows Update client. The executable path and command line indicate a known patch installation (AM_Delta_Patch_1.427.562.0.exe) in the SoftwareDistribution directory, consistent with normal Windows Update behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-020,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious location (foxprow.exe) and invoking Excel.Application to activate a malicious application, indicating unauthorized and potentially malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious location (foxprow.exe) and invoking Excel.Application to activate a malicious application, indicating unauthorized and potentially malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-021,Malicious,Benign,High,"The event shows a legitimate command execution of 'cmd.exe' with 'chcp' command, which is commonly used to change the code page in Windows and is a normal administrative function. No suspicious behavior or indicators of malicious activity are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a legitimate command execution of 'cmd.exe' with 'chcp' command, which is commonly used to change the code page in Windows and is a normal administrative function. No suspicious behavior or indicators of malicious activity are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-022,Benign,Benign,High,"The event shows a standard PowerShell command 'ls' (list directory) executed in the default console host, with no suspicious script block text or external command execution. This is a common administrative task and part of normal PowerShell usage.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a standard PowerShell command 'ls' (list directory) executed in the default console host, with no suspicious script block text or external command execution. This is a common administrative task and part of normal PowerShell usage.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-023,Malicious,Malicious,High,"The command_line contains a PowerShell script that performs repeated HTTP requests to a domain with a randomly generated name (file.XXX.127.0.0.1.xip.io), which is a known technique for exfiltrating data or conducting reconnaissance. The use of Invoke-WebRequest in a loop with random names suggests malicious intent, such as data collection or command-and-control communication.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell script that performs repeated HTTP requests to a domain with a randomly generated name (file.XXX.127.0.0.1.xip.io), which is a known technique for exfiltrating data or conducting reconnaissance. The use of Invoke-WebRequest in a loop with random names suggests malicious intent, such as data collection or command-and-control communication.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-024,Malicious,Malicious,High,"The event shows a registry modification command executed by cmd.exe to disable registry tools via reg add, which is a common tactic to hide or disable system monitoring and forensic capabilities, typically associated with malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a registry modification command executed by cmd.exe to disable registry tools via reg add, which is a common tactic to hide or disable system monitoring and forensic capabilities, typically associated with malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-025,Benign,Benign,High,"The event involves the execution of AM_Delta.exe, which is a known Windows Update component, triggered by wuauclt.exe (Windows Update Agent) in a quiet mode. This behavior is consistent with legitimate system updates and is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves the execution of AM_Delta.exe, which is a known Windows Update component, triggered by wuauclt.exe (Windows Update Agent) in a quiet mode. This behavior is consistent with legitimate system updates and is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-026,Benign,Malicious,High,"The command_line field shows a PowerShell command that converts a password to a secure string and exports it as plain text, which is a common technique in credential theft and is indicative of malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line field shows a PowerShell command that converts a password to a secure string and exports it as plain text, which is a common technique in credential theft and is indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-027,Benign,Benign,Medium,"The event involves PowerShell ISE executing a script from a user's desktop, but the script block text is empty and contains only metadata about the execution environment, with no malicious commands or payloads. The command line points to a legitimate PowerShell ISE invocation with a test script, which is common in normal user activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""Medium"",
+  ""evidence"": ""The event involves PowerShell ISE executing a script from a user's desktop, but the script block text is empty and contains only metadata about the execution environment, with no malicious commands or payloads. The command line points to a legitimate PowerShell ISE invocation with a test script, which is common in normal user activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-028,Malicious,Benign,High,"The event records a process creation by bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a process creation by bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-029,Benign,Benign,High,"The event involves AggregatorHost.exe, a legitimate Windows system process that runs under NT AUTHORITY\SYSTEM and is commonly associated with Windows Update and system services. It is launched by svchost.exe, which is a normal Windows service host. No suspicious behavior or external command-line arguments are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves AggregatorHost.exe, a legitimate Windows system process that runs under NT AUTHORITY\\SYSTEM and is commonly associated with Windows Update and system services. It is launched by svchost.exe, which is a normal Windows service host. No suspicious behavior or external command-line arguments are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-030,Benign,Benign,High,"The event involves the execution of AM_Engine.exe from the SoftwareDistribution folder, which is a known location for Windows Update components. The parent process is wuauclt.exe, the Windows Update client, indicating this is part of a legitimate system update process. No malicious behavior or anomalous pattern is observed.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves the execution of AM_Engine.exe from the SoftwareDistribution folder, which is a known location for Windows Update components. The parent process is wuauclt.exe, the Windows Update client, indicating this is part of a legitimate system update process. No malicious behavior or anomalous pattern is observed.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-031,Benign,Benign,High,"The event records a software update installation process initiated by wuauclt.exe, which is a legitimate Windows Update client. The executable path and command line indicate a known patch installation (AM_Delta_Patch_1.427.566.0.exe) in the SoftwareDistribution directory, consistent with normal Windows Update behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a software update installation process initiated by wuauclt.exe, which is a legitimate Windows Update client. The executable path and command line indicate a known patch installation (AM_Delta_Patch_1.427.566.0.exe) in the SoftwareDistribution directory, consistent with normal Windows Update behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-032,Benign,Benign,High,"The event is a PowerShell engine status report with no execution of malicious commands or script blocks. The script_block_text is empty and contains only metadata about the PowerShell host and engine, indicating a normal system operation.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event is a PowerShell engine status report with no execution of malicious commands or script blocks. The script_block_text is empty and contains only metadata about the PowerShell host and engine, indicating a normal system operation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-033,Benign,Benign,High,"Event ID 5024 in the Security channel indicates a successful authentication attempt, which is a normal system operation and not inherently malicious.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 5024 in the Security channel indicates a successful authentication attempt, which is a normal system operation and not inherently malicious.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-034,Benign,Benign,High,"Event ID 4648 logs a successful logon, but the user 'WORKGROUP\SERVER002$' is a built-in system account typically used for service accounts or local system operations. The image path points to wininit.exe, a legitimate system process, and the command line matches the expected startup process. This is a normal system boot activity and not indicative of malicious behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4648 logs a successful logon, but the user 'WORKGROUP\\SERVER002$' is a built-in system account typically used for service accounts or local system operations. The image path points to wininit.exe, a legitimate system process, and the command line matches the expected startup process. This is a normal system boot activity and not indicative of malicious behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-035,Benign,Benign,High,"The event involves the execution of a patch installer (AM_Engine_Patch_1.1.25030.1.exe) from the SoftwareDistribution directory, which is a legitimate location for Windows update and patch installations. The parent process is wuauclt.exe, the Windows Update client, indicating this is part of a normal system update process.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves the execution of a patch installer (AM_Engine_Patch_1.1.25030.1.exe) from the SoftwareDistribution directory, which is a legitimate location for Windows update and patch installations. The parent process is wuauclt.exe, the Windows Update client, indicating this is part of a normal system update process.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-036,Benign,Benign,High,"The event involves the execution of Microsoft 3D Viewer, a legitimate Windows AppX application, with a standard command-line argument. The process is running under a system account and is part of normal Windows functionality, with no signs of suspicious behavior or unauthorized access.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves the execution of Microsoft 3D Viewer, a legitimate Windows AppX application, with a standard command-line argument. The process is running under a system account and is part of normal Windows functionality, with no signs of suspicious behavior or unauthorized access.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-037,Malicious,Benign,High,"The event shows a legitimate system command execution of 'chcp' (change code page) via cmd.exe, which is a common and normal administrative task. The image path points to a system executable, and the command is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a legitimate system command execution of 'chcp' (change code page) via cmd.exe, which is a common and normal administrative task. The image path points to a system executable, and the command is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-038,Malicious,Malicious,High,"The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a spoofed IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a spoofed IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-039,Benign,Benign,High,"Event ID 4799 indicates a successful logon attempt, which is a normal system operation. The event involves a local user account (lplui) on Server002, and such logon events are expected during routine system usage and do not indicate malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4799 indicates a successful logon attempt, which is a normal system operation. The event involves a local user account (lplui) on Server002, and such logon events are expected during routine system usage and do not indicate malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-040,Malicious,Malicious,High,"The event shows a wmic command executed via cmd.exe to uninstall a product named 'Tightvnc%%%%', which is a known remote access tool. Uninstalling such tools via automated scripts or commands, especially from an administrative context, is indicative of a potential removal attempt by an attacker to cover their tracks or disable detection mechanisms.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a wmic command executed via cmd.exe to uninstall a product named 'Tightvnc%%%%', which is a known remote access tool. Uninstalling such tools via automated scripts or commands, especially from an administrative context, is indicative of a potential removal attempt by an attacker to cover their tracks or disable detection mechanisms.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-041,Malicious,Benign,High,"The event shows bitsadmin.exe being used to resume a file transfer, which is a legitimate system function. The process is running under a standard system account and is initiated from cmd.exe, a common and authorized environment. No signs of malicious behavior are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows bitsadmin.exe being used to resume a file transfer, which is a legitimate system function. The process is running under a standard system account and is initiated from cmd.exe, a common and authorized environment. No signs of malicious behavior are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-042,Benign,Benign,High,"The event is a Sysmon event ID 5 (process creation) with an unknown process image and command line, logged by the SYSTEM user. This is common during normal system operations and lacks specific indicators of malicious activity such as suspicious file paths, unauthorized execution, or known malware signatures.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event is a Sysmon event ID 5 (process creation) with an unknown process image and command line, logged by the SYSTEM user. This is common during normal system operations and lacks specific indicators of malicious activity such as suspicious file paths, unauthorized execution, or known malware signatures.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-043,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests a probing or scanning behavior, indicative of malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests a probing or scanning behavior, indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-044,Malicious,Malicious,High,"The event shows PowerShell executing a command that copies a Windows calculator executable to a suspicious file (foxprow.exe) and attempts to activate an Excel application via COM, which is out of the ordinary and indicative of malicious activity such as payload delivery or privilege escalation.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows PowerShell executing a command that copies a Windows calculator executable to a suspicious file (foxprow.exe) and attempts to activate an Excel application via COM, which is out of the ordinary and indicative of malicious activity such as payload delivery or privilege escalation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-045,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the Temp directory. It attempts to authenticate with NTLM using the current user's credentials, which is a clear sign of credential stuffing or brute-force attack.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the Temp directory. It attempts to authenticate with NTLM using the current user's credentials, which is a clear sign of credential stuffing or brute-force attack.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-046,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script that copies calc.exe to a suspicious location (foxprow.exe) and attempts to activate an Excel application via COM, which is indicative of malicious activity such as malware execution or privilege escalation.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script that copies calc.exe to a suspicious location (foxprow.exe) and attempts to activate an Excel application via COM, which is indicative of malicious activity such as malware execution or privilege escalation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-047,Malicious,Malicious,High,"The event shows bitsadmin.exe downloading a file from a GitHub URL and saving it to a temporary PowerShell script location, which is a common technique for delivering malicious payloads. The command line includes a suspicious file name and a direct download to a PowerShell script, indicating potential malware delivery.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows bitsadmin.exe downloading a file from a GitHub URL and saving it to a temporary PowerShell script location, which is a common technique for delivering malicious payloads. The command line includes a suspicious file name and a direct download to a PowerShell script, indicating potential malware delivery.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-048,Malicious,Malicious,High,"The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-049,Benign,Benign,High,"The event involves AppVShNotify.exe, a legitimate component of Microsoft Office Click-to-Run, running under the SYSTEM account with a known parent process (OfficeClickToRun.exe). This behavior is consistent with normal Office installation or update operations and is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves AppVShNotify.exe, a legitimate component of Microsoft Office Click-to-Run, running under the SYSTEM account with a known parent process (OfficeClickToRun.exe). This behavior is consistent with normal Office installation or update operations and is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-050,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-051,Benign,Benign,High,"The event involves ApplicationFrameHost.exe, a legitimate Windows process used for hosting UI elements in applications. The command line '-Embedding' is a normal parameter for this process and is commonly used in legitimate scenarios such as running embedded applications or UI components. No suspicious behavior or unauthorized access is indicated.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves ApplicationFrameHost.exe, a legitimate Windows process used for hosting UI elements in applications. The command line '-Embedding' is a normal parameter for this process and is commonly used in legitimate scenarios such as running embedded applications or UI components. No suspicious behavior or unauthorized access is indicated.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-052,Malicious,Malicious,High,"The event shows a command-line execution of cmd.exe launching a document file from a temporary directory (C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.002\bin\DDE_Document.docx), which is suspicious as it originates from a temporary path and uses DDE (Dynamic Data Exchange) capable document, commonly associated with malware payloads.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a command-line execution of cmd.exe launching a document file from a temporary directory (C:\\Users\\ADMIN_~1\\AppData\\Local\\Temp\\file\\data.002\\bin\\DDE_Document.docx), which is suspicious as it originates from a temporary path and uses DDE (Dynamic Data Exchange) capable document, commonly associated with malware payloads.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-053,Benign,Benign,High,"The event involves backgroundTaskHost.exe, a legitimate Windows process responsible for hosting background tasks, running under svchost.exe, which is a common parent process. The command line references a valid AppX package name, which is typical for Windows application task execution. No signs of suspicious behavior or unauthorized access are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves backgroundTaskHost.exe, a legitimate Windows process responsible for hosting background tasks, running under svchost.exe, which is a common parent process. The command line references a valid AppX package name, which is typical for Windows application task execution. No signs of suspicious behavior or unauthorized access are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-054,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-055,Malicious,Benign,High,"The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-056,Malicious,Malicious,High,"The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-057,Benign,Benign,High,"The event shows a legitimate PowerShell command to list files on the desktop ('ls ~/Desktop') executed by the default PowerShell host. The command line and script block text indicate normal user activity without signs of malicious behavior such as command execution from untrusted sources, suspicious payloads, or unauthorized access attempts.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a legitimate PowerShell command to list files on the desktop ('ls ~/Desktop') executed by the default PowerShell host. The command line and script block text indicate normal user activity without signs of malicious behavior such as command execution from untrusted sources, suspicious payloads, or unauthorized access attempts.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-058,Malicious,Benign,High,"The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-059,Benign,Benign,High,"The event involves a legitimate Microsoft Office application (PowerPoint) launching a known Office AI component (ai.exe) with a valid command-line argument pointing to a standard Office feature (PowerPointCombinedFloatieLreOnline.onnx), which is part of normal Office functionality and not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves a legitimate Microsoft Office application (PowerPoint) launching a known Office AI component (ai.exe) with a valid command-line argument pointing to a standard Office feature (PowerPointCombinedFloatieLreOnline.onnx), which is part of normal Office functionality and not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-060,Malicious,Malicious,High,"The event shows a command-line execution of cmd.exe creating a directory, writing an encrypted message to a file, and using WinRAR to create a RAR archive, which is indicative of malicious activity such as ransomware deployment. The use of a suspicious command line with encryption and archive creation is strongly associated with malware behavior.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a command-line execution of cmd.exe creating a directory, writing an encrypted message to a file, and using WinRAR to create a RAR archive, which is indicative of malicious activity such as ransomware deployment. The use of a suspicious command line with encryption and archive creation is strongly associated with malware behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-061,Malicious,Malicious,High,"The event shows a PowerShell script executing a loop that performs HTTP requests to external domains (https://8.8.8.8/resolve?name=file.XXX.127.0.0.1.xip.io) in a manner typical of reconnaissance or data exfiltration, using a randomized filename. This behavior is indicative of malicious activity, especially when executed by a privileged account (SERVER002\admin_test) and originating from a known legitimate process (wsmprovhost.exe).",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a PowerShell script executing a loop that performs HTTP requests to external domains (https://8.8.8.8/resolve?name=file.XXX.127.0.0.1.xip.io) in a manner typical of reconnaissance or data exfiltration, using a randomized filename. This behavior is indicative of malicious activity, especially when executed by a privileged account (SERVER002\\admin_test) and originating from a known legitimate process (wsmprovhost.exe).""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-062,Benign,Benign,High,"Event ID 4624 indicates a successful logon. The user 'WORKGROUP\SERVER002$' is a built-in local system account commonly used by Windows services. The image 'C:\Windows\System32\services.exe' is a legitimate system process, and the command line matches the expected behavior of a service startup. This is a normal system operation and not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4624 indicates a successful logon. The user 'WORKGROUP\\SERVER002$' is a built-in local system account commonly used by Windows services. The image 'C:\\Windows\\System32\\services.exe' is a legitimate system process, and the command line matches the expected behavior of a service startup. This is a normal system operation and not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-063,Benign,Benign,High,"Event ID 5061 indicates a successful logon by the LOCAL SERVICE account, which is a legitimate system account used by Windows services. This activity is normal and expected, and not indicative of malicious behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 5061 indicates a successful logon by the LOCAL SERVICE account, which is a legitimate system account used by Windows services. This activity is normal and expected, and not indicative of malicious behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-064,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, specifically targeting the current user's account with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, specifically targeting the current user's account with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-065,Malicious,Benign,Medium,"The event shows a cmd.exe process launched by wsmprovhost.exe, executing a command to check for the presence of WinRAR. This is a common administrative or system check and does not indicate malicious activity, as WinRAR is a legitimate software package. The command is not attempting to execute or download malicious payloads.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""Medium"",
+  ""evidence"": ""The event shows a cmd.exe process launched by wsmprovhost.exe, executing a command to check for the presence of WinRAR. This is a common administrative or system check and does not indicate malicious activity, as WinRAR is a legitimate software package. The command is not attempting to execute or download malicious payloads.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-066,Benign,Benign,High,"The event involves PowerShell's wsmprovhost.exe running in embedding mode, which is a legitimate component used for Windows Management Instrumentation (WMI) operations. The command line and script block text do not indicate malicious activity, and such behavior is common in normal system operations.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves PowerShell's wsmprovhost.exe running in embedding mode, which is a legitimate component used for Windows Management Instrumentation (WMI) operations. The command line and script block text do not indicate malicious activity, and such behavior is common in normal system operations.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-067,Malicious,Malicious,High,"The event shows a PowerShell script attempting to brute-force LDAP credentials by reading a passwords file from a temporary location and testing each password against an account using NTLM authentication, which is a classic credential brute-forcing technique.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a PowerShell script attempting to brute-force LDAP credentials by reading a passwords file from a temporary location and testing each password against an account using NTLM authentication, which is a classic credential brute-forcing technique.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-068,Benign,Benign,High,"The event involves BackgroundTransferHost.exe, a legitimate Windows process responsible for managing background file transfers. The command line indicates normal operation with a configured server name, which is typical behavior for this service. No signs of malicious activity are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves BackgroundTransferHost.exe, a legitimate Windows process responsible for managing background file transfers. The command line indicates normal operation with a configured server name, which is typical behavior for this service. No signs of malicious activity are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-069,Malicious,Malicious,High,"The command_line contains a PowerShell script that copies calc.exe to a suspicious executable path (foxprow.exe), and the script_block_text includes execution of Excel.Application to activate a malicious app, indicating a potential malware payload.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell script that copies calc.exe to a suspicious executable path (foxprow.exe), and the script_block_text includes execution of Excel.Application to activate a malicious app, indicating a potential malware payload.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-070,Benign,Benign,High,"Event ID 4798 indicates a successful logon by the local system account 'SERVER002$', which is a legitimate service account used by Windows for system operations. This is a common and expected behavior in a domain or workgroup environment, especially for services like SMB or backup operations.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4798 indicates a successful logon by the local system account 'SERVER002$', which is a legitimate service account used by Windows for system operations. This is a common and expected behavior in a domain or workgroup environment, especially for services like SMB or backup operations.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-071,Benign,Benign,High,"The PowerShell command scans INF files in the Windows directory for specific installation sections, which is a legitimate system diagnostic activity. The script does not execute arbitrary code or perform malicious actions, and runs under Restricted execution policy, limiting potential harm.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The PowerShell command scans INF files in the Windows directory for specific installation sections, which is a legitimate system diagnostic activity. The script does not execute arbitrary code or perform malicious actions, and runs under Restricted execution policy, limiting potential harm.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-072,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, attempting to validate credentials with NTLM authentication. This is a clear indication of a credential stuffing or brute-force attack.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, attempting to validate credentials with NTLM authentication. This is a clear indication of a credential stuffing or brute-force attack.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-073,Malicious,Benign,Medium,"The event shows a PowerShell command attempting to copy a file, but the operation fails because the destination path does not exist. The command includes a reference to a suspicious filename 'foxprow.exe', which is not a standard Windows application. However, the failure to copy does not indicate execution or malicious activity, and the context lacks evidence of actual execution or payload delivery. The absence of successful file operations and the presence of a failed copy suggest a benign or misconfigured attempt.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""Medium"",
+  ""evidence"": ""The event shows a PowerShell command attempting to copy a file, but the operation fails because the destination path does not exist. The command includes a reference to a suspicious filename 'foxprow.exe', which is not a standard Windows application. However, the failure to copy does not indicate execution or malicious activity, and the context lacks evidence of actual execution or payload delivery. The absence of successful file operations and the presence of a failed copy suggest a benign or misconfigured attempt.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-074,Malicious,Benign,High,"The event shows bitsadmin.exe being launched with a /create command to create a download job, which is a legitimate system function used for managing file transfers. The process is initiated from cmd.exe, a common and authorized shell, and the user is a system-level account (SERVER002\admin_test), which is typical for administrative tasks. No signs of malicious behavior are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows bitsadmin.exe being launched with a /create command to create a download job, which is a legitimate system function used for managing file transfers. The process is initiated from cmd.exe, a common and authorized shell, and the user is a system-level account (SERVER002\\admin_test), which is typical for administrative tasks. No signs of malicious behavior are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-075,Benign,Benign,High,"Event ID 4738 indicates a successful logon by a system account (WORKGROUP\SERVER002$), which is normal for local system services and is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4738 indicates a successful logon by a system account (WORKGROUP\\SERVER002$), which is normal for local system services and is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-076,Benign,Benign,High,"The event involves AppHostRegistrationVerifier.exe, a legitimate Windows system process responsible for verifying application host registration. It is launched by svchost.exe, a common system service host, and is part of normal Windows operation. No suspicious behavior or unauthorized activity is indicated.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves AppHostRegistrationVerifier.exe, a legitimate Windows system process responsible for verifying application host registration. It is launched by svchost.exe, a common system service host, and is part of normal Windows operation. No suspicious behavior or unauthorized activity is indicated.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-077,Benign,Benign,High,"The event records a legitimate software update installer (BraveBrowser) running under SYSTEM account, with a known, authorized update process from BraveSoftware. The parent process is BraveUpdate.exe, which is consistent with normal update behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a legitimate software update installer (BraveBrowser) running under SYSTEM account, with a known, authorized update process from BraveSoftware. The parent process is BraveUpdate.exe, which is consistent with normal update behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-078,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-079,Benign,Benign,High,"The event shows a PowerShell command executing a simple Write-Host statement with no malicious activity. The command line and script block text indicate a legitimate, restricted PowerShell session performing a harmless output operation with no signs of code execution, payload delivery, or suspicious behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a PowerShell command executing a simple Write-Host statement with no malicious activity. The command line and script block text indicate a legitimate, restricted PowerShell session performing a harmless output operation with no signs of code execution, payload delivery, or suspicious behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-080,Benign,Benign,High,"The command line executes a standard PowerShell hostname command, which is a common and legitimate system utility for retrieving the server's name. No suspicious or malicious activity is present in the script block text or command line.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command line executes a standard PowerShell hostname command, which is a common and legitimate system utility for retrieving the server's name. No suspicious or malicious activity is present in the script block text or command line.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-081,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the Temp directory. It attempts to authenticate with NTLM using the current user's credentials, which is a clear sign of credential stuffing or brute-force attack.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the Temp directory. It attempts to authenticate with NTLM using the current user's credentials, which is a clear sign of credential stuffing or brute-force attack.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-082,Malicious,Benign,High,"The event involves the execution of chcp.com, a legitimate Windows command that changes the code page. This is a common system utility and not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves the execution of chcp.com, a legitimate Windows command that changes the code page. This is a common system utility and not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-083,Malicious,Benign,High,"The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-084,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the Temp directory, attempting to validate credentials with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the Temp directory, attempting to validate credentials with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-085,Benign,Malicious,High,"The command line contains a PowerShell script that retrieves a username and password in plain text, constructs a secure credential object, and explicitly uses ConvertTo-SecureString with -AsPlainText -Force, which is a common indicator of credential harvesting and is often associated with malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command line contains a PowerShell script that retrieves a username and password in plain text, constructs a secure credential object, and explicitly uses ConvertTo-SecureString with -AsPlainText -Force, which is a common indicator of credential harvesting and is often associated with malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-086,Malicious,Malicious,High,"The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, attempting to validate credentials with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The script block text shows a brute-force attack against LDAP credentials using a list of passwords from a file located in the temporary directory, attempting to validate credentials with NTLM authentication. This is a clear indication of credential stuffing or brute-force attack behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-087,Benign,Benign,High,"Event ID 4738 indicates a successful logon by a system account (WORKGROUP\SERVER002$), which is normal for local system services and is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4738 indicates a successful logon by a system account (WORKGROUP\\SERVER002$), which is normal for local system services and is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-088,Benign,Benign,High,"The event records a software update installation process initiated by wuauclt.exe, which is a legitimate Windows Update client. The executable path and command line indicate a known patch installation (AM_Delta_Patch_1.427.605.0.exe) in the SoftwareDistribution directory, consistent with normal Windows Update behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a software update installation process initiated by wuauclt.exe, which is a legitimate Windows Update client. The executable path and command line indicate a known patch installation (AM_Delta_Patch_1.427.605.0.exe) in the SoftwareDistribution directory, consistent with normal Windows Update behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-089,Benign,Benign,High,"Event ID 4672 indicates a successful logon by the NT AUTHORITY\SYSTEM account, which is a legitimate system account used for system operations and is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4672 indicates a successful logon by the NT AUTHORITY\\SYSTEM account, which is a legitimate system account used for system operations and is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-090,Malicious,Malicious,High,"The event shows reg.exe being used to disable registry tools (DisableRegistryTools) under the current user's policy, which is a common tactic to prevent system monitoring and forensic analysis, indicating a potential attempt to hide malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows reg.exe being used to disable registry tools (DisableRegistryTools) under the current user's policy, which is a common tactic to prevent system monitoring and forensic analysis, indicating a potential attempt to hide malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-091,Benign,Benign,High,"The event involves autochk.exe, a legitimate Windows system utility that runs during boot or system checks, and is commonly executed by the system itself. The command line '\??\C:\Windows\system32\autochk.exe *' is a standard invocation for this process. The parent process is smss.exe, which is the Windows Session Manager and expected to spawn autochk.exe during system operations. No signs of malicious behavior are present.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves autochk.exe, a legitimate Windows system utility that runs during boot or system checks, and is commonly executed by the system itself. The command line '\\??\\C:\\Windows\\system32\\autochk.exe *' is a standard invocation for this process. The parent process is smss.exe, which is the Windows Session Manager and expected to spawn autochk.exe during system operations. No signs of malicious behavior are present.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-092,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script copying calc.exe to a suspicious executable (foxprow.exe) and attempting to activate an Excel application via COM, which is indicative of malicious activity such as malware deployment or privilege escalation.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-093,Benign,Benign,High,"Event ID 4798 indicates a successful logon by the local system account 'SERVER002$', which is a legitimate service account used by Windows for system operations. This is a common and expected behavior in a domain or workgroup environment, especially for services like SMB or backup operations.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4798 indicates a successful logon by the local system account 'SERVER002$', which is a legitimate service account used by Windows for system operations. This is a common and expected behavior in a domain or workgroup environment, especially for services like SMB or backup operations.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-094,Malicious,Malicious,High,"The command_line and script_block_text show a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests a probing or scanning behavior, indicative of malicious activity.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line and script_block_text show a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests a probing or scanning behavior, indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-095,Malicious,Malicious,High,"The command_line contains a PowerShell command that copies calc.exe to a suspicious location (foxprow.exe), and the script_block_text includes execution of Excel.Application to activate a malicious app, indicating a potential malware payload.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell command that copies calc.exe to a suspicious location (foxprow.exe), and the script_block_text includes execution of Excel.Application to activate a malicious app, indicating a potential malware payload.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-096,Benign,Benign,High,"The event shows a legitimate PowerShell command execution involving standard system commands (Get-Service and Get-Process), which are commonly used for system monitoring and are part of normal administrative activities. There is no indication of malicious behavior such as command injection, execution of suspicious scripts, or unauthorized access.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event shows a legitimate PowerShell command execution involving standard system commands (Get-Service and Get-Process), which are commonly used for system monitoring and are part of normal administrative activities. There is no indication of malicious behavior such as command injection, execution of suspicious scripts, or unauthorized access.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-097,Malicious,Malicious,High,"The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.",[],"{
+  ""classification"": ""Malicious"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The command_line contains a PowerShell script that performs 1000 iterations of an Invoke-WebRequest to a domain that resolves to a TXT record on a non-standard IP (127.0.0.1.xip.io), which is a common technique used in reconnaissance or data exfiltration. The use of random file names and repeated requests suggests an attempt to gather information or establish a covert communication channel, indicating malicious intent.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-098,Malicious,Benign,High,"The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event records a process creation of bitsadmin.exe, which is a legitimate Windows utility used for downloading and transferring files. The process is running in a standard system path and is commonly used for scheduled tasks or file transfers, indicating normal system behavior.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-099,Benign,Benign,High,"Event ID 4672 indicates a successful logon by the NT AUTHORITY\SYSTEM account, which is a legitimate system account used for system operations and is not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""Event ID 4672 indicates a successful logon by the NT AUTHORITY\\SYSTEM account, which is a legitimate system account used for system operations and is not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,
+CYB499-100,Benign,Benign,High,"The event involves audiodg.exe, a legitimate Windows audio service process, running under the LOCAL SERVICE account with parent svchost.exe, which is common for system services. The command line parameters are standard for audio driver operations and not indicative of malicious activity.",[],"{
+  ""classification"": ""Benign"",
+  ""confidence"": ""High"",
+  ""evidence"": ""The event involves audiodg.exe, a legitimate Windows audio service process, running under the LOCAL SERVICE account with parent svchost.exe, which is common for system services. The command line parameters are standard for audio driver operations and not indicative of malicious activity.""
+}",Qwen/Qwen3-4B-Instruct-2507,direct,completed,

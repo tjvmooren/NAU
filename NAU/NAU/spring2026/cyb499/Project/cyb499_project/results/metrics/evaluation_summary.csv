@@ -1,0 +1,5 @@
+input_file,total_rows,valid_ground_truth_rows,valid_prediction_rows,evaluated_rows,missing_or_invalid_ground_truth,missing_or_invalid_predictions,accuracy,precision,recall,f1_score,false_positive,false_negative,true_negative,true_positive,metrics_json,confusion_matrix_figure
+results/raw_model_outputs/openai_direct.csv,100,100,100,100,0,0,0.830000,1.000000,0.660000,0.795181,0,17,50,33,results/metrics/openai_direct_metrics.json,results/figures/openai_direct_confusion_matrix.svg
+results/raw_model_outputs/openai_structured.csv,100,100,100,100,0,0,0.860000,1.000000,0.720000,0.837209,0,14,50,36,results/metrics/openai_structured_metrics.json,results/figures/openai_structured_confusion_matrix.svg
+results/raw_model_outputs/qwen_direct.csv,100,100,100,100,0,0,0.820000,0.944444,0.680000,0.790698,2,16,48,34,results/metrics/qwen_direct_metrics.json,results/figures/qwen_direct_confusion_matrix.svg
+results/raw_model_outputs/qwen_structured.csv,100,100,100,100,0,0,0.790000,0.853659,0.700000,0.769231,6,15,44,35,results/metrics/qwen_structured_metrics.json,results/figures/qwen_structured_confusion_matrix.svg

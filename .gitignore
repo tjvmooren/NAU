@@ -1,0 +1,44 @@
+# Python environments and caches
+**/.venv/
+**/venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+
+# Node and frontend build output
+**/node_modules/
+**/dist/
+**/build/
+
+# Compiled binaries and objects
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+**/*.o
+**/*.obj
+**/*.class
+
+# Local secrets and machine-specific files
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*token*.json
+**/passwords.txt
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+**/.vscode/
+**/.idea/
+**/~$*
+**/*.log
+
+# Optional: uncomment these if you want a lighter repo and prefer to keep
+# the largest CYB499 raw source logs local instead of in GitHub.
+# NAU/NAU/spring2026/cyb499/Project/cyb499_project/data/raw/benign/sysmon.json
+# NAU/NAU/spring2026/cyb499/Project/cyb499_project/data/raw/benign/security.json
